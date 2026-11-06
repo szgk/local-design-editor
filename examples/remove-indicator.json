@@ -1,0 +1,19 @@
+{
+  "mode": "inpaint",
+  "source": "robot.png",
+  "editable_mask": "panel-mask.png",
+  "feather": 3,
+  "instruction": "Remove only the circular status indicator and restore the plain chest panel",
+  "protected_constraints": [
+    "Preserve the robot silhouette, face, body and background"
+  ],
+  "parameters": {
+    "checkpoint": "sd-v1-5-inpainting.ckpt",
+    "prompt": "plain uniform blue grey panel, flat solid blue grey color, minimalist vector art",
+    "negative_prompt": "button, indicator, circle, ring, hole, dot, highlight, text, shadow",
+    "seed": 42,
+    "steps": 20,
+    "cfg": 8,
+    "denoise": 1.0
+  }
+}

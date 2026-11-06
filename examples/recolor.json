@@ -1,0 +1,10 @@
+{
+  "mode": "recolor",
+  "source": "robot.png",
+  "editable_mask": "indicator-mask.png",
+  "hue": 0,
+  "instruction": "Change only the circular status indicator from blue to red",
+  "protected_constraints": [
+    "Preserve all shapes, placement and other colors"
+  ]
+}

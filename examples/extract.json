@@ -1,0 +1,11 @@
+{
+  "mode": "extract",
+  "source": "robot.png",
+  "box": [
+    112,
+    62,
+    400,
+    338
+  ],
+  "instruction": "Crop the visible robot head without filling hidden surfaces"
+}

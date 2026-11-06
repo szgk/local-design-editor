@@ -1,0 +1,26 @@
+{
+  "mode": "inpaint",
+  "source": "robot.png",
+  "editable_mask": "panel-mask.png",
+  "feather": 3,
+  "instruction": "Replace the circular status indicator with a small square status indicator",
+  "protected_constraints": [
+    "Preserve the robot silhouette, face, body and background"
+  ],
+  "parameters": {
+    "checkpoint": "sd-v1-5-inpainting.ckpt",
+    "prompt": "a bright red square button, solid red square, flat vector illustration, blue grey background",
+    "negative_prompt": "text, shading, photorealistic, extra buttons",
+    "seed": 7,
+    "steps": 20,
+    "cfg": 8,
+    "denoise": 1.0,
+    "context_box": [
+      192,
+      328,
+      320,
+      456
+    ],
+    "context_resolution": 512
+  }
+}
