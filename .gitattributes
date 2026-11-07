@@ -1,2 +1,2 @@
 # These are exact, hash-bound validation artifacts. Preserve their original bytes.
-examples/*-validation.json -text
+examples/*-validation.json -text whitespace=cr-at-eol
