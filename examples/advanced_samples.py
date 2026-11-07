@@ -54,11 +54,13 @@ def create_advanced(root):
     alternate["palette"]["indicator"] = [221, 51, 51, 255]
     write(root / "standard-alternative.json", alternate)
     # Validation references generated files by explicit relative paths supplied in a real run.
-    views = {v: {"image": v + ".png", "projection": "orthographic", "pixels_per_unit": 100, "origin": [128, 239], "landmarks": {
+    views = {v: {"image": v + ".png", "projection": "orthographic", "pixels_per_unit": 100, "origin": [127.5, 239], "landmarks": {
         "head_top": {"selector": {"kind": "background", "rgb": [245, 242, 235], "roi": [32, 0, 224, 144]}, "measure": "top"},
         "body_bottom": {"selector": {"kind": "background", "rgb": [245, 242, 235], "roi": [32, 144, 224, 256]}, "measure": "bottom"},
     }} for v in all_views}
-    write(root / "views-template.json", {"views": views, "alignments": [{"landmark": feature, "axis": "y", "views": all_views, "tolerance": 0} for feature in ("head_top", "body_bottom")], "visibility": [{"view": v, "feature": "indicator", "selector": {"kind": "color", "rgb": [51, 153, 221]}, "visible": v == "front"} for v in all_views], "feature_views": {"head": all_views, "indicator": ["front"]}})
+    alignments = [{"landmark": feature, "axis": "y", "views": all_views, "tolerance": 0} for feature in ("head_top", "body_bottom")]
+    alignments += [{"landmark": "head_top", "axis": axis, "views": views, "tolerance": 0} for axis, views in (("x", ["front", "back"]), ("z", ["left", "right"]))]
+    write(root / "views-template.json", {"views": views, "alignments": alignments, "visibility": [{"view": v, "feature": "indicator", "selector": {"kind": "color", "rgb": [51, 153, 221]}, "visible": v == "front"} for v in all_views], "feature_views": {"head": all_views, "indicator": ["front"]}})
 
 
 if __name__ == "__main__":
