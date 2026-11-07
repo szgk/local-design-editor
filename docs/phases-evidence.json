@@ -1,0 +1,146 @@
+{
+  "phase1": "previously accepted",
+  "cpu_tests": 45,
+  "model_comparison": [
+    {
+      "name": "sd15",
+      "parameters": {
+        "family": "sd15",
+        "loader": "checkpoint",
+        "checkpoint": "sd-v1-5-inpainting.ckpt"
+      },
+      "elapsed_seconds": 2.4070000000065193,
+      "sampled_device_peak_mib": 3302,
+      "vram_measurement": "sampled whole-device usage, includes desktop and other processes; not exact allocator peak",
+      "result_sha256": "408a4a065a0772c1472b9f6385417a857099f77f55faee62a2ea07a1acd8177a",
+      "protected_changed_pixels": 0,
+      "visual_review": "accepted",
+      "visual_note": "Light-blue woven cloth replaces the declared patch; visible folds accepted. Protected pixels remain exact."
+    },
+    {
+      "name": "sd15-canny",
+      "parameters": {
+        "family": "sd15",
+        "loader": "checkpoint",
+        "checkpoint": "sd-v1-5-inpainting.ckpt",
+        "controlnet": {
+          "model": "sd15-canny-fp16.safetensors",
+          "family": "sd15",
+          "kind": "canny",
+          "strength": 0.7
+        }
+      },
+      "elapsed_seconds": 3.2339999999967404,
+      "sampled_device_peak_mib": 4006,
+      "vram_measurement": "sampled whole-device usage, includes desktop and other processes; not exact allocator peak",
+      "result_sha256": "6bbdfb9514f4c5f12781ac4b92794bf2fbd119739958e4050e575994745b26eb",
+      "protected_changed_pixels": 0,
+      "visual_review": "rejected",
+      "visual_note": "The circular feature remains; unsuitable for the instruction that replaces the whole surface and indicator."
+    },
+    {
+      "name": "sdxl",
+      "parameters": {
+        "family": "sdxl",
+        "loader": "diffusers",
+        "model_path": "sdxl-inpaint"
+      },
+      "elapsed_seconds": 12.530999999988126,
+      "sampled_device_peak_mib": 6534,
+      "vram_measurement": "sampled whole-device usage, includes desktop and other processes; not exact allocator peak",
+      "result_sha256": "340e48af3f6a0446bb6a1235409452c08ed7905c7197439a0e079259e26458c8",
+      "protected_changed_pixels": 0,
+      "visual_review": "rejected",
+      "visual_note": "Striped image does not satisfy the requested woven material in this tested loader and sampling configuration."
+    }
+  ],
+  "default_model_changed": false,
+  "instruction_tasks": {
+    "\u8868\u793a\u706f\u306e\u8272\u3060\u3051\u8d64\u306b\u5909\u66f4": {
+      "protected_changed_pixels": 0,
+      "source_unchanged": true,
+      "quality": {
+        "pass": true,
+        "checks": [
+          {
+            "kind": "silhouette",
+            "pass": true,
+            "iou": 1.0,
+            "hausdorff_pixels": 0.0,
+            "mean_contour_distance_pixels": 0.0,
+            "measured": true
+          },
+          {
+            "kind": "change",
+            "pass": true,
+            "changed_pixels": 1073
+          }
+        ],
+        "intent_review": "pending"
+      }
+    },
+    "make indicator square": {
+      "protected_changed_pixels": 0,
+      "source_unchanged": true,
+      "quality": {
+        "pass": true,
+        "checks": [
+          {
+            "kind": "silhouette",
+            "pass": true,
+            "iou": 1.0,
+            "hausdorff_pixels": 0.0,
+            "mean_contour_distance_pixels": 0.0,
+            "measured": true
+          },
+          {
+            "kind": "change",
+            "pass": true,
+            "changed_pixels": 1185
+          }
+        ],
+        "intent_review": "pending"
+      }
+    },
+    "extract head": {
+      "protected_changed_pixels": null,
+      "source_unchanged": true,
+      "quality": null
+    }
+  },
+  "batch": {
+    "design_count": 2,
+    "pass": true
+  },
+  "multiview": {
+    "design_count": 2,
+    "views_per_design": 4,
+    "height_spreads": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "visibility_pass": true,
+    "perturbed_height_rejected": true,
+    "hidden_geometry_verified": false
+  },
+  "bounded_gpu_retry": {
+    "attempts": 2,
+    "causes": [
+      "insufficient_change",
+      "insufficient_change"
+    ],
+    "best_candidate_saved": true
+  },
+  "reviewed_recipe_reuse_verified": true,
+  "new_diffusion_generation": {
+    "transport": "executed",
+    "visual_review": "rejected",
+    "reason": "Watermark-like text and cropped feet; not adopted"
+  }
+}

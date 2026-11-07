@@ -1,0 +1,11 @@
+{
+  "instruction": "change indicator to red",
+  "items": [
+    {
+      "catalog": "catalog.json"
+    },
+    {
+      "catalog": "catalog-alternative.json"
+    }
+  ]
+}

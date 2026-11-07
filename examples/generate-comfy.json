@@ -1,0 +1,18 @@
+{
+  "engine": "comfy",
+  "size": [512, 512],
+  "views": ["front"],
+  "background": [245, 242, 235, 255],
+  "description": "one simple friendly geometric robot, rectangular light blue head and body, two small black eyes, short arms and feet, centered full body",
+  "style": "flat vector illustration, plain off-white background, no text",
+  "parameters": {
+    "family": "sd15",
+    "checkpoint": "sd-v1-5-inpainting.ckpt",
+    "prompt": "set by the new-design description and explicit view",
+    "negative_prompt": "text, logo, watermark, multiple characters",
+    "seed": 42,
+    "steps": 20,
+    "cfg": 7,
+    "denoise": 1.0
+  }
+}

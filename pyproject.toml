@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "local-design-editor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Local, mask-constrained design editing with exact protected-pixel verification"
 requires-python = ">=3.11"
 dependencies = ["Pillow==11.3.0", "numpy==2.2.6", "opencv-python-headless==4.12.0.88", "requests==2.32.5"]

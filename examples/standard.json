@@ -1,0 +1,149 @@
+{
+  "engine": "geometric",
+  "size": [
+    256,
+    256
+  ],
+  "views": [
+    "front",
+    "left",
+    "right",
+    "back"
+  ],
+  "background": [
+    245,
+    242,
+    235,
+    255
+  ],
+  "palette": {
+    "body": [
+      166,
+      189,
+      201,
+      255
+    ],
+    "detail": [
+      37,
+      54,
+      64,
+      255
+    ],
+    "indicator": [
+      51,
+      153,
+      221,
+      255
+    ]
+  },
+  "parts": [
+    {
+      "shape": "rectangle",
+      "color": "body",
+      "views": {
+        "front": [
+          64,
+          32,
+          192,
+          144
+        ],
+        "left": [
+          88,
+          32,
+          168,
+          144
+        ],
+        "right": [
+          88,
+          32,
+          168,
+          144
+        ],
+        "back": [
+          64,
+          32,
+          192,
+          144
+        ]
+      }
+    },
+    {
+      "shape": "rectangle",
+      "color": "body",
+      "views": {
+        "front": [
+          80,
+          144,
+          176,
+          240
+        ],
+        "left": [
+          104,
+          144,
+          152,
+          240
+        ],
+        "right": [
+          104,
+          144,
+          152,
+          240
+        ],
+        "back": [
+          80,
+          144,
+          176,
+          240
+        ]
+      }
+    },
+    {
+      "shape": "ellipse",
+      "color": "detail",
+      "views": {
+        "front": [
+          90,
+          72,
+          102,
+          84
+        ],
+        "left": [
+          124,
+          72,
+          136,
+          84
+        ],
+        "right": [
+          120,
+          72,
+          132,
+          84
+        ]
+      }
+    },
+    {
+      "shape": "ellipse",
+      "color": "detail",
+      "views": {
+        "front": [
+          154,
+          72,
+          166,
+          84
+        ]
+      }
+    },
+    {
+      "shape": "ellipse",
+      "color": "indicator",
+      "views": {
+        "front": [
+          120,
+          184,
+          136,
+          200
+        ]
+      }
+    }
+  ]
+}

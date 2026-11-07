@@ -105,10 +105,19 @@ design-edit run examples/textile.json
 design-edit review runs/<id> --status accepted --reviewer <name> --note "原寸と拡大で指定形状と保持範囲を確認した具体的な所見" --result-sha256 <validation.jsonのresult_sha256>
 ```
 
-## 今後の段階
+## Phase 2・3
 
-Phase 1の実画像レビューを通過してから、マスク精度、パラメータ調整、ControlNet、SDXL、他のローカルモデルの順に必要性を判断します。Phase 2/3の自然言語解釈・自動検出・IoU/Hausdorff・ランドマーク・左右対称・複数視点照合・条件付き再試行・モデル比較は未実装です。無制限の自動再生成は行いません。タイムアウト時のジョブはComfyUIに残る可能性があり、記録したIDで確認します。
+Phase 1の検証後に、輪郭・ランドマーク・左右対称性の測定、ControlNet、SDXLとの実機比較、登録領域に対する日英の指示解釈、領域検出、条件付き再試行、複数デザインの一括処理、四方向の座標・表示部品検証、明示的な新規生成と検証済み設定の再利用を実装しました。モデル比較で不合格だった候補を採用せず、既定はSD1.5のままです。
 
-複数方向の将来仕様では物体自身の左右、同尺度・同投影、遮蔽と取り付け位置を記録します。2Dから検証できない奥行きは推定とし、他視点を勝手に再生成しません。新規生成は局所編集とは別操作として扱い、現CLIでは提供しません。
+自然言語は登録済みの対象名と限定した構文に対応し、未知の指示・曖昧な対象はエラーにします。2Dから検証できない奥行き・隠れた面は未検証として残し、他視点を勝手に再生成しません。新規生成は`generate`として局所編集と分離しています。詳細な対応範囲、実機比較の失敗を含む結果、CLIの使い方は[Phase 1–3の検証と操作](docs/phases.md)を参照してください。
+
+```sh
+python -m examples.advanced_samples
+design-edit auto examples/catalog.json "表示灯の色だけ赤に変更"
+design-edit auto examples/catalog.json "make indicator square"
+design-edit batch examples/batch.json
+design-edit generate examples/standard.json
+python -m scripts.acceptance
+```
 
 開発・検証状況は[検証記録](docs/validation.md)を参照してください。

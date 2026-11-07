@@ -1,0 +1,43 @@
+[
+  {
+    "name": "sd15",
+    "parameters": {
+      "family": "sd15",
+      "loader": "checkpoint",
+      "checkpoint": "sd-v1-5-inpainting.ckpt"
+    },
+    "identity": {
+      "sha256": "c6bbc15e3224e6973459ba78de4998b80b50112b0ae5b5c67113d56b4e366b19"
+    }
+  },
+  {
+    "name": "sd15-canny",
+    "parameters": {
+      "family": "sd15",
+      "loader": "checkpoint",
+      "checkpoint": "sd-v1-5-inpainting.ckpt",
+      "controlnet": {
+        "model": "sd15-canny-fp16.safetensors",
+        "family": "sd15",
+        "kind": "canny",
+        "strength": 0.7
+      }
+    },
+    "identity": {
+      "repository": "lllyasviel/control_v11p_sd15_canny",
+      "revision": "115a470d547982438f70198e353a921996e2e819"
+    }
+  },
+  {
+    "name": "sdxl",
+    "parameters": {
+      "family": "sdxl",
+      "loader": "diffusers",
+      "model_path": "sdxl-inpaint"
+    },
+    "identity": {
+      "repository": "diffusers/stable-diffusion-xl-1.0-inpainting-0.1",
+      "revision": "115134f363124c53c7d878647567d04daf26e41e"
+    }
+  }
+]

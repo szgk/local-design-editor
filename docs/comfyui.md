@@ -26,4 +26,17 @@ Use a separate terminal for the server. A low-VRAM setting is a starting configu
 
 The workflow is assembled by `design_editor/comfy.py` and saved with each run. It uses `CheckpointLoaderSimple`, `LoadImage`, `LoadImageMask` (red channel, white=editable), `CLIPTextEncode`, `InpaintModelConditioning`, `KSampler`, `VAEDecode`, `SaveImage`. It never trusts the diffusion output to preserve pixels: the final application-side composite supplies that boundary.
 
+## Optional Phase 2 comparison weights
+
+```sh
+python scripts/fetch_models.py controlnet
+python scripts/fetch_models.py sdxl
+python .runtime/ComfyUI/main.py --listen 127.0.0.1 --port 8188 --lowvram --disable-dynamic-vram --disable-async-offload --disable-all-custom-nodes
+design-edit compare examples/textile.json examples/profiles.json
+```
+
+The downloader uses pinned official Hugging Face revisions and verifies LFS SHA256 hashes. It requires `curl` (Windows: `curl.exe`) and downloads roughly 0.72 GB of Canny weights and 6.94 GB of SDXL components. No weights are included in Git. SDXL uses CreativeML OpenRAIL++ and the [official model card](https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1); Canny uses the [author's model](https://huggingface.co/lllyasviel/control_v11p_sd15_canny) and its license. The local SDXL `DiffusersLoader` plus `CLIPTextEncodeSDXL` is comparison-only: the tested configuration produced a rejected visual result, so it is not the default. See [the measured outcomes](phases.md).
+
+Canny is calculated locally with OpenCV from the working source image, then connected through `ControlNetLoader` and `ControlNetApplyAdvanced`. Family names must match (`sd15` Canny cannot be connected to `sdxl`). Other ControlNet preprocessors and FLUX adapters are not installed because no accepted task required them. Unsupported model families fail explicitly instead of reusing an incompatible graph.
+
 For small targets, optional `parameters.context_box` selects a square context crop in source coordinates, containing the whole effective mask. `context_resolution` (64–1024, default 512) scales only this working crop for inference. The candidate patch is resized back to the crop dimensions, then composited within the original mask. This changes interpolation inside the edit region; it does not create new evidence or guarantee shape accuracy. The full source and protected pixels are never resized. Non-square crops are rejected to avoid aspect distortion.

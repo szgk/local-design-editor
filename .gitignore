@@ -8,4 +8,7 @@ __pycache__/
 .env
 *.ckpt
 *.safetensors
+*.pt
+*.pth
+*.bin
 *.log

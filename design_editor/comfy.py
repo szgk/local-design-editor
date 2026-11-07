@@ -14,10 +14,12 @@ class Backend(Protocol):
 
 
 def workflow(image_name, mask_name, p):
+    if p.get("family", "sd15") not in ("sd15", "sdxl"):
+        raise ValueError("This backend supports sd15/sdxl; other architectures require a compatible backend adapter")
     def node(kind, **inputs):
         return {"class_type": kind, "inputs": inputs}
-    return {
-        "1": node("CheckpointLoaderSimple", ckpt_name=p["checkpoint"]),
+    graph = {
+        "1": node("CheckpointLoaderSimple", ckpt_name=p.get("checkpoint", "unused")),
         "2": node("LoadImage", image=image_name),
         "3": node("LoadImageMask", image=mask_name, channel="red"),
         "4": node("CLIPTextEncode", text=p["prompt"], clip=["1", 1]),
@@ -27,6 +29,25 @@ def workflow(image_name, mask_name, p):
         "8": node("VAEDecode", samples=["7", 0], vae=["1", 2]),
         "9": node("SaveImage", images=["8", 0], filename_prefix="design_editor"),
     }
+    if p.get("loader", "checkpoint") == "diffusers":
+        graph["1"] = node("DiffusersLoader", model_path=p["model_path"])
+    elif p.get("loader", "checkpoint") != "checkpoint":
+        raise ValueError("Unsupported local model loader")
+    if p.get("family") == "sdxl":
+        resolution = p.get("context_resolution", 1024)
+        for key, text in (("4", p["prompt"]), ("5", p.get("negative_prompt", ""))):
+            graph[key] = node("CLIPTextEncodeSDXL", clip=["1", 1], width=resolution, height=resolution, crop_w=0, crop_h=0, target_width=resolution, target_height=resolution, text_g=text, text_l=text)
+    if p.get("controlnet"):
+        control = p["controlnet"]
+        if control.get("family") != p.get("family", "sd15"):
+            raise ValueError("ControlNet and generation model families must match")
+        if not control.get("image"):
+            raise ValueError("ControlNet requires a preprocessed reference image")
+        graph["10"] = node("LoadImage", image=control["image"])
+        graph["11"] = node("ControlNetLoader", control_net_name=control["model"])
+        graph["12"] = node("ControlNetApplyAdvanced", positive=["6", 0], negative=["6", 1], control_net=["11", 0], image=["10", 0], strength=control.get("strength", 0.7), start_percent=0.0, end_percent=control.get("end", 1.0))
+        graph["7"]["inputs"].update(positive=["12", 0], negative=["12", 1])
+    return graph
 
 
 class ComfyBackend:
@@ -79,6 +100,17 @@ class ComfyBackend:
         padded_mask.paste(mask)
         canvas.save(directory / "inference-source.png")
         padded_mask.save(directory / "inference-mask.png")
+        parameters = __import__("copy").deepcopy(parameters)
+        if parameters.get("controlnet"):
+            import cv2
+            import numpy as np
+            control = parameters["controlnet"]
+            if control.get("kind", "canny") != "canny":
+                raise ValueError("Only Canny preprocessing is installed")
+            edges = cv2.Canny(np.array(canvas), control.get("low", 100), control.get("high", 200))
+            control_image = Image.fromarray(edges).convert("RGB")
+            control_image.save(directory / "control.png")
+            control["image"] = self.upload(control_image)
         graph = workflow(self.upload(canvas), self.upload(padded_mask), parameters)
         (directory / "workflow.json").write_text(json.dumps(graph, indent=2), encoding="utf-8")
         stats = self.request("GET", "/system_stats").json()

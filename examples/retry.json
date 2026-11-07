@@ -1,0 +1,26 @@
+{
+  "max_attempts": 3,
+  "changes": [
+    {
+      "cause": "no_change",
+      "parameters": {
+        "denoise": 1.0,
+        "seed": 43
+      }
+    },
+    {
+      "cause": "insufficient_change",
+      "parameters": {
+        "denoise": 1.0,
+        "seed": 43
+      }
+    },
+    {
+      "cause": "shape_drift",
+      "parameters": {
+        "denoise": 0.5,
+        "seed": 44
+      }
+    }
+  ]
+}

@@ -64,10 +64,17 @@ def run(spec, root="runs", backend=None):
             candidate.save(directory / "candidate.png")
             result = composite(original, candidate, effective)
             report, heat = verify(original, result, editable, protected)
+            from .quality import boundary_metrics
+            report["boundary"] = boundary_metrics(original, result, effective)
             if spec.get("expectations"):
                 from .validation import evaluate
                 report["expectations"] = evaluate(original, result, spec["expectations"])
                 if not report["expectations"]["pass"]:
+                    report["overall_status"] = "failed"
+            if spec.get("quality"):
+                from .quality import assess
+                report["quality"] = assess(original, result, spec["quality"])
+                if not report["quality"]["pass"]:
                     report["overall_status"] = "failed"
             heat.save(directory / "difference.png")
             comparison = Image.new("RGBA", (original.width * 3, original.height))

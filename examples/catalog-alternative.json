@@ -1,0 +1,225 @@
+{
+  "source": "robot-alternative.png",
+  "regions": {
+    "indicator": {
+      "aliases": [
+        "\u30e9\u30f3\u30d7"
+      ],
+      "selector": {
+        "kind": "color",
+        "rgb": [
+          51,
+          153,
+          221
+        ],
+        "roi": [
+          220,
+          356,
+          292,
+          428
+        ],
+        "min_area": 100,
+        "max_area": 2000
+      },
+      "selectors": {
+        "geometry": {
+          "kind": "box",
+          "box": [
+            230,
+            366,
+            283,
+            419
+          ]
+        }
+      },
+      "geometry": {
+        "kind": "rectangle",
+        "erase_box": [
+          230,
+          366,
+          283,
+          419
+        ],
+        "box": [
+          240,
+          376,
+          273,
+          409
+        ],
+        "background": [
+          166,
+          189,
+          201
+        ],
+        "fill": [
+          221,
+          51,
+          51
+        ]
+      },
+      "expectations": [
+        {
+          "kind": "solid_rectangle",
+          "box": [
+            240,
+            376,
+            273,
+            409
+          ],
+          "rgb": [
+            221,
+            51,
+            51
+          ]
+        },
+        {
+          "kind": "solid_rectangle",
+          "box": [
+            230,
+            366,
+            283,
+            376
+          ],
+          "rgb": [
+            166,
+            189,
+            201
+          ]
+        },
+        {
+          "kind": "solid_rectangle",
+          "box": [
+            230,
+            409,
+            283,
+            419
+          ],
+          "rgb": [
+            166,
+            189,
+            201
+          ]
+        },
+        {
+          "kind": "solid_rectangle",
+          "box": [
+            230,
+            376,
+            240,
+            409
+          ],
+          "rgb": [
+            166,
+            189,
+            201
+          ]
+        },
+        {
+          "kind": "solid_rectangle",
+          "box": [
+            273,
+            376,
+            283,
+            409
+          ],
+          "rgb": [
+            166,
+            189,
+            201
+          ]
+        },
+        {
+          "kind": "unchanged_outside_box",
+          "box": [
+            230,
+            366,
+            283,
+            419
+          ]
+        },
+        {
+          "kind": "alpha_unchanged"
+        }
+      ],
+      "quality": {
+        "silhouette": {
+          "selector": {
+            "kind": "background",
+            "rgb": [
+              245,
+              242,
+              235
+            ]
+          },
+          "min_iou": 1,
+          "max_hausdorff": 0
+        },
+        "min_changed_pixels": 1
+      }
+    },
+    "head": {
+      "aliases": [
+        "\u982d\u90e8"
+      ],
+      "selector": {
+        "kind": "background",
+        "rgb": [
+          245,
+          242,
+          235
+        ],
+        "roi": [
+          112,
+          62,
+          400,
+          330
+        ]
+      }
+    },
+    "surface": {
+      "aliases": [
+        "\u8868\u9762"
+      ],
+      "selector": {
+        "kind": "box",
+        "box": [
+          208,
+          348,
+          304,
+          444
+        ]
+      },
+      "parameters": {
+        "checkpoint": "sd-v1-5-inpainting.ckpt",
+        "prompt": "macro photograph of light blue woven linen fabric, visible woven threads and fibers, matte textile texture",
+        "negative_prompt": "smooth, flat color, illustration, plastic, metal, circle, button, text",
+        "seed": 42,
+        "steps": 20,
+        "cfg": 7,
+        "denoise": 1.0,
+        "context_box": [
+          208,
+          348,
+          304,
+          444
+        ],
+        "context_resolution": 512
+      },
+      "quality": {
+        "silhouette": {
+          "selector": {
+            "kind": "background",
+            "rgb": [
+              245,
+              242,
+              235
+            ]
+          },
+          "min_iou": 1,
+          "max_hausdorff": 0
+        },
+        "min_changed_pixels": 1
+      }
+    }
+  }
+}

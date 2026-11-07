@@ -1,0 +1,40 @@
+{
+  "mode": "inpaint",
+  "source": "robot.png",
+  "editable_mask": "surface-mask.png",
+  "feather": 0,
+  "instruction": "Replace the surface with light blue woven cloth while retaining a circular motif at the original indicator position",
+  "protected_constraints": [
+    "Preserve the head, face, body silhouette, other panel areas and background"
+  ],
+  "parameters": {
+    "checkpoint": "sd-v1-5-inpainting.ckpt",
+    "prompt": "light blue woven cloth, a round blue woven medallion in the center, visible textile fibers",
+    "negative_prompt": "text, letters, metal, plastic",
+    "seed": 42,
+    "steps": 20,
+    "cfg": 7,
+    "denoise": 1.0,
+    "context_box": [
+      208,
+      348,
+      304,
+      444
+    ],
+    "context_resolution": 512
+  },
+  "quality": {
+    "min_changed_pixels": 1,
+    "edge_preservation": {
+      "box": [
+        228,
+        364,
+        284,
+        420
+      ],
+      "low": 20,
+      "high": 60,
+      "max_mean_distance": 2
+    }
+  }
+}
