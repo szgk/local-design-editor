@@ -1,0 +1,99 @@
+{
+  "pixel_preservation_pass": true,
+  "protected_changed_pixels": 0,
+  "protected_max_channel_delta": 0,
+  "changed_pixels": 1185,
+  "editable_changed_pixels": 1185,
+  "resolution_preserved": true,
+  "intent_review": "pending",
+  "overall_status": "needs_visual_review",
+  "expectations": {
+    "pass": true,
+    "checks": [
+      {
+        "kind": "solid_rectangle",
+        "pass": true,
+        "matching_pixels": 1089,
+        "required_pixels": 1089,
+        "center": [
+          256.0,
+          392.0
+        ],
+        "size": [
+          33,
+          33
+        ]
+      },
+      {
+        "kind": "solid_rectangle",
+        "pass": true,
+        "matching_pixels": 530,
+        "required_pixels": 530,
+        "center": [
+          256.0,
+          370.5
+        ],
+        "size": [
+          53,
+          10
+        ]
+      },
+      {
+        "kind": "solid_rectangle",
+        "pass": true,
+        "matching_pixels": 530,
+        "required_pixels": 530,
+        "center": [
+          256.0,
+          413.5
+        ],
+        "size": [
+          53,
+          10
+        ]
+      },
+      {
+        "kind": "solid_rectangle",
+        "pass": true,
+        "matching_pixels": 330,
+        "required_pixels": 330,
+        "center": [
+          234.5,
+          392.0
+        ],
+        "size": [
+          10,
+          33
+        ]
+      },
+      {
+        "kind": "solid_rectangle",
+        "pass": true,
+        "matching_pixels": 330,
+        "required_pixels": 330,
+        "center": [
+          277.5,
+          392.0
+        ],
+        "size": [
+          10,
+          33
+        ]
+      },
+      {
+        "kind": "unchanged_outside_box",
+        "pass": true,
+        "changed_pixels": 0
+      },
+      {
+        "kind": "alpha_unchanged",
+        "pass": true,
+        "changed_pixels": 0
+      }
+    ]
+  },
+  "source_sha256": "ca2cbbf192e9dfc955b1b3f2b43cd654c185070a6432fdd785bf32a460ab4c8c",
+  "source_unchanged": true,
+  "result_sha256": "b63762a03af0d33840f990f5441e02ff94726167e1a88eadf61031984e5bb047",
+  "elapsed_seconds": 0.09400000001187436
+}

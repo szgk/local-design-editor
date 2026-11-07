@@ -1,0 +1,8 @@
+{
+  "status": "accepted",
+  "reviewer": "codex-visual-review",
+  "note": "Native composite and 512px generation inspected: light blue woven cloth with folds replaces only the declared surface patch and indicator. Weave is visible in the generated working image; at native 96px patch scale fine threads are reduced. Hard square insert boundary is intentional. Head, face, silhouette, other panel areas, alpha and background are preserved.",
+  "result_sha256": "4bd6a97f8b380b7b80b1efd3ea6f3f5e3a705ba8463d07bff09c38049bbe4e2d",
+  "validation_sha256": "e8d131afa3e947a7a950b72bc5650c3f531ab4f3cdb36cfa5c5e6f52670bee2e",
+  "created_at": "2026-11-07T01:57:51.499620+00:00"
+}

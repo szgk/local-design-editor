@@ -1,0 +1,118 @@
+{
+  "mode": "geometry",
+  "source": "robot.png",
+  "editable_mask": "panel-mask.png",
+  "instruction": "Replace the circular indicator with a centered 33 by 33 pixel solid red square; keep the panel flat and preserve everything else",
+  "protected_constraints": [
+    "Keep the silhouette, face, body, background, alpha and indicator center unchanged"
+  ],
+  "geometry": {
+    "kind": "rectangle",
+    "erase_box": [
+      230,
+      366,
+      283,
+      419
+    ],
+    "box": [
+      240,
+      376,
+      273,
+      409
+    ],
+    "background": [
+      166,
+      189,
+      201
+    ],
+    "fill": [
+      221,
+      51,
+      51
+    ]
+  },
+  "expectations": [
+    {
+      "kind": "solid_rectangle",
+      "box": [
+        240,
+        376,
+        273,
+        409
+      ],
+      "rgb": [
+        221,
+        51,
+        51
+      ]
+    },
+    {
+      "kind": "solid_rectangle",
+      "box": [
+        230,
+        366,
+        283,
+        376
+      ],
+      "rgb": [
+        166,
+        189,
+        201
+      ]
+    },
+    {
+      "kind": "solid_rectangle",
+      "box": [
+        230,
+        409,
+        283,
+        419
+      ],
+      "rgb": [
+        166,
+        189,
+        201
+      ]
+    },
+    {
+      "kind": "solid_rectangle",
+      "box": [
+        230,
+        376,
+        240,
+        409
+      ],
+      "rgb": [
+        166,
+        189,
+        201
+      ]
+    },
+    {
+      "kind": "solid_rectangle",
+      "box": [
+        273,
+        376,
+        283,
+        409
+      ],
+      "rgb": [
+        166,
+        189,
+        201
+      ]
+    },
+    {
+      "kind": "unchanged_outside_box",
+      "box": [
+        230,
+        366,
+        283,
+        419
+      ]
+    },
+    {
+      "kind": "alpha_unchanged"
+    }
+  ]
+}

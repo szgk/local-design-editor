@@ -1,0 +1,14 @@
+{
+  "pixel_preservation_pass": true,
+  "protected_changed_pixels": 0,
+  "protected_max_channel_delta": 0,
+  "changed_pixels": 9216,
+  "editable_changed_pixels": 9216,
+  "resolution_preserved": true,
+  "intent_review": "pending",
+  "overall_status": "needs_visual_review",
+  "source_sha256": "ca2cbbf192e9dfc955b1b3f2b43cd654c185070a6432fdd785bf32a460ab4c8c",
+  "source_unchanged": true,
+  "result_sha256": "4bd6a97f8b380b7b80b1efd3ea6f3f5e3a705ba8463d07bff09c38049bbe4e2d",
+  "elapsed_seconds": 2.8439999999827705
+}

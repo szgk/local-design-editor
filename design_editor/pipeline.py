@@ -49,6 +49,9 @@ def run(spec, root="runs", backend=None):
             Image.fromarray(effective).save(directory / "effective.png")
             if mode == "recolor":
                 candidate = recolor(original, spec["hue"])
+            elif mode == "geometry":
+                from .geometry import replace_shape
+                candidate = replace_shape(original, effective, spec["geometry"])
             elif mode == "composite":
                 candidate = load(spec["candidate"])
             elif mode in ("inpaint", "redesign"):
@@ -57,10 +60,15 @@ def run(spec, root="runs", backend=None):
                     backend = ComfyBackend(spec.get("url", "http://127.0.0.1:8188"), spec.get("timeout", 300))
                 candidate = backend.generate(original, Image.fromarray(effective), spec["parameters"], directory)
             else:
-                raise ValueError("Supported modes: extract, recolor, composite, inpaint, redesign")
+                raise ValueError("Supported modes: extract, recolor, geometry, composite, inpaint, redesign")
             candidate.save(directory / "candidate.png")
             result = composite(original, candidate, effective)
             report, heat = verify(original, result, editable, protected)
+            if spec.get("expectations"):
+                from .validation import evaluate
+                report["expectations"] = evaluate(original, result, spec["expectations"])
+                if not report["expectations"]["pass"]:
+                    report["overall_status"] = "failed"
             heat.save(directory / "difference.png")
             comparison = Image.new("RGBA", (original.width * 3, original.height))
             for i, image in enumerate((original, result, heat)):

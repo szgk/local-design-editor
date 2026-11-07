@@ -77,6 +77,8 @@ class ComfyBackend:
         canvas.paste(image.convert("RGB"))
         padded_mask = Image.new("L", size)
         padded_mask.paste(mask)
+        canvas.save(directory / "inference-source.png")
+        padded_mask.save(directory / "inference-mask.png")
         graph = workflow(self.upload(canvas), self.upload(padded_mask), parameters)
         (directory / "workflow.json").write_text(json.dumps(graph, indent=2), encoding="utf-8")
         stats = self.request("GET", "/system_stats").json()
@@ -97,6 +99,7 @@ class ComfyBackend:
                     with Image.open(io.BytesIO(response.content)) as result:
                         if result.size != size:
                             raise ValueError("Backend changed canvas dimensions")
+                        result.save(directory / "decoded-generation.png")
                         result = result.convert("RGBA").crop((0, 0, image.width, image.height))
                         if context_box:
                             patch = result.resize((x1 - x0, y1 - y0), Image.Resampling.LANCZOS)

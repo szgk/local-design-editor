@@ -1,0 +1,26 @@
+{
+  "mode": "inpaint",
+  "source": "robot.png",
+  "editable_mask": "surface-mask.png",
+  "feather": 0,
+  "instruction": "Replace only the masked chest surface, including its circular indicator, with a light blue woven textile insert",
+  "protected_constraints": [
+    "Preserve the head, face, body silhouette, other panel areas and background"
+  ],
+  "parameters": {
+    "checkpoint": "sd-v1-5-inpainting.ckpt",
+    "prompt": "macro photograph of light blue woven linen fabric, visible woven threads and fibers, matte textile texture",
+    "negative_prompt": "smooth, flat color, illustration, plastic, metal, circle, button, text",
+    "seed": 42,
+    "steps": 20,
+    "cfg": 7,
+    "denoise": 1.0,
+    "context_box": [
+      208,
+      348,
+      304,
+      444
+    ],
+    "context_resolution": 512
+  }
+}
